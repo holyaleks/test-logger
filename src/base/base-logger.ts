@@ -2,32 +2,33 @@ import { LogType } from '../models/enums/logger-type';
 import { colorPicker } from '../colors/color-picker';
 import { configConsoleColors } from '../config/config';
 import { ColorReference } from '../models/types-objects/color-reference.tp';
+import { ILogger } from './interface/logger.interface';
 
-export class Logger {
+export class Logger implements ILogger {
 
-    static logStartTest(message: string): void {
+    startTest(message: string): void {
         this.logOperation(message, LogType.ST);
     }
-    static logEndTest(message: string): void {
+    endTest(message: string): void {
         this.logOperation(message, LogType.END);
     }
-    static logStackTrace(message: string): void {
+    stackTrace(message: string): void {
         this.logOperation(message, LogType.TR);
     }
-    static logError(message: string): void {
+    error(message: string): void {
         this.logOperation(message, LogType.ERR);
     }
-    static logWarning(message: string): void {
+    warning(message: string): void {
         this.logOperation(message, LogType.WRN);
     }
-    static logInfo(message: string): void {
+    info(message: string): void {
         this.logOperation(message, LogType.INF);
     }
-    static logTestStep(message: string): void {
+    testStep(message: string): void {
         this.logOperation(message, LogType.STP);
     }
 
-    private static logOperation(message: string, type: LogType): void {
+    private logOperation(message: string, type: LogType): void {
         const color = configConsoleColors(type);
         const options = this.options();
         
@@ -37,7 +38,7 @@ export class Logger {
         )
     }
 
-    private static options(): {} {
+    private options(): {} {
         return { 
             year: 'numeric',
             month: 'numeric', 
