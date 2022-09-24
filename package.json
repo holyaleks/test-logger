@@ -1,5 +1,5 @@
 {
-  "name": "@holyaleks/test-logger",
+  "name": "tests-logger",
   "version": "1.0.0",
   "description": "Test Logger",
   "main": "lib/index.js",
