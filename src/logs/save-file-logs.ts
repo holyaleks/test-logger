@@ -3,11 +3,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as util from 'util';
 
-var defaultPath = path.join(__dirname, '../..', '/')
+var defaultPath = path.join(__dirname, '../..', '/test-logs.log')
 
 export class ReportWriter {
     private readonly config = new Config();
-    private readonly fsStream = this.fsStreamConfigured ? fs.createWriteStream(this.config.configuration.reportPath || defaultPath) : undefined;
+    private readonly fsStream = this.fsStreamConfigured ? this.createStream() : undefined;
 
     constructor(private readonly fsStreamConfigured = false) {}
 
@@ -22,6 +22,16 @@ export class ReportWriter {
             } catch (e) {
                 return null;
             }
+        }
+    }
+
+    private createStream(): fs.WriteStream {
+        if(fs.existsSync(path.join(__dirname, '../..', `${this.config.configuration.reportPath}`) || defaultPath)) {
+            return fs.createWriteStream(path.join(__dirname, '../..', `${this.config.configuration.reportPath}`) || defaultPath);
+        } else {
+            fs.mkdirSync(path.join(__dirname, '../..', `${this.config.configuration.reportPath?.replace(/[\w-]+\.log/, '')}`) || defaultPath, { recursive: true });
+
+            return fs.createWriteStream(path.join(__dirname, '../..', `${this.config.configuration.reportPath}`) || defaultPath);
         }
     }
 }
