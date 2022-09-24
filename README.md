@@ -4,6 +4,8 @@ Test logger tool is for easier logging your activity within the automated tests.
 
 # Installiation
 
+[![npm](https://img.shields.io/npm/v/tests-logger?style=flat-square)](https://www.npmjs.com/package/tests-logger) 
+
 Install `Test Logger` in your test project with the following command
 
 ```
