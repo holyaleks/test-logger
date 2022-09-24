@@ -158,7 +158,7 @@ Error logs in the console have red color ![#FF0000](https://via.placeholder.com/
 
 ![image](https://user-images.githubusercontent.com/44750553/192116147-537aaf2a-1a34-47ce-95d2-c3e6227f38c7.png)
 
-Error logs in the console have magenta color ![#FF00FF](https://via.placeholder.com/10/FF00FF/FF00FF.png):
+Test step logs in the console have magenta color ![#FF00FF](https://via.placeholder.com/10/FF00FF/FF00FF.png):
 
 ![image](https://user-images.githubusercontent.com/44750553/192116199-377d22f3-c5df-4187-9a85-65e1036fc85e.png)
 
