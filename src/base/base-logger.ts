@@ -1,19 +1,20 @@
 import { LogType } from '../models/enums/logger-type';
-import { colorPicker } from '../colors/color-picker';
-import { configConsoleColors } from '../config/config';
-import { ColorReference } from '../models/types-objects/color-reference.tp';
+import { Config } from '../config/config';
 import { ILogger } from './interface/logger.interface';
+import { ReportWriter } from '../logs/save-file-logs';
 
 export class Logger implements ILogger {
+    private readonly config = new Config
+    private readonly reportWriter = new ReportWriter(this.config.configuration.report);
 
     startTest(message: string): void {
-        this.logOperation(message, LogType.ST);
+        this.logOperation(message, LogType.STR);
     }
     endTest(message: string): void {
         this.logOperation(message, LogType.END);
     }
     stackTrace(message: string): void {
-        this.logOperation(message, LogType.TR);
+        this.logOperation(message, LogType.TRC);
     }
     error(message: string): void {
         this.logOperation(message, LogType.ERR);
@@ -29,13 +30,15 @@ export class Logger implements ILogger {
     }
 
     private logOperation(message: string, type: LogType): void {
-        const color = configConsoleColors(type);
+        const color = this.config.configConsoleColors(type);
         const options = this.options();
+        const date = new Date();
         
-        console.log(
-            color.color,
-            `[${type}] - ${new Date().toLocaleDateString(undefined, options)} ------------- ${message}`
-        )
+        if (this.config.configuration.report) {
+            this.reportWriter.writeReport();
+        }
+        const loggedMessage = `[${type}]  ${date.toLocaleDateString('it-US', options) + `.${date.getMilliseconds()}`} --------------------------------------- ${message}`;
+        console.log(color, loggedMessage, type === LogType.END && this.config.configuration.report ? '\n                            ************************************************\n' : '');
     }
 
     private options(): {} {

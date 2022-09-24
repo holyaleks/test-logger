@@ -1,7 +1,7 @@
 export enum LogType {
-    ST = 'ST',
+    STR = 'STR',
     END = 'END',
-    TR = 'TR',
+    TRC = 'TRC',
     ERR = 'ERR',
     WRN = 'WRN',
     INF = 'INF',
