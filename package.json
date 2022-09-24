@@ -1,5 +1,5 @@
 {
-  "name": "tests-logger",
+  "name": "@holyaleks/tests-logger",
   "version": "1.0.0",
   "description": "Test Logger",
   "main": "lib/index.js",
@@ -41,5 +41,8 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "publishConfig": {
+    "@holyaleks:registry": "https://npm.pkg.github.com"
+  }
 }
